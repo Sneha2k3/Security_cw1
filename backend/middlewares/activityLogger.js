@@ -1,7 +1,7 @@
 const ActivityLog = require("../models/ActivityLog");
-const {v4:uuidv4}  = require('uuid');
+const { v4: uuidv4 } = require('uuid');
 const os = require('os');
-const logger = require('../config/logger'); 
+const logger = require('../config/logger');
 
 const activityLogger = async (req, res, next) => {
     const start = Date.now();
@@ -45,7 +45,7 @@ const sanitizeBody = (body) => {
     sensitiveFields.forEach(field => {
         if (sanitized[field]) {
             sanitized[field] = '[REDACTED]';
-        }
+        };
     });
 
     return sanitized;
