@@ -45,7 +45,7 @@ const sanitizeBody = (body) => {
     sensitiveFields.forEach(field => {
         if (sanitized[field]) {
             sanitized[field] = '[REDACTED]';
-        };
+        }
     });
 
     return sanitized;
