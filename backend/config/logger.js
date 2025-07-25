@@ -5,7 +5,7 @@ const logger = winston.createLogger({
     level: 'info',
     format: winston.format.combine(
         winston.format.timestamp(),
-        winston.format.json()
+        winston.format.json
     ),
     transports: [
         new winston.transports.Console(),
@@ -15,7 +15,7 @@ const logger = winston.createLogger({
             level: 'info',
             storeHost: true,
             capped: true,
-            cappedMax: 1000000 
+            cappedMax: 1000000
         }),
         new winston.transports.File({ filename: 'activity.log' })
     ],
