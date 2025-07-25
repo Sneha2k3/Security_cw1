@@ -16,4 +16,4 @@ async function connectdb() {
     }
 }
 
-module.exports = connectdb
+module.exports = connectdb;
