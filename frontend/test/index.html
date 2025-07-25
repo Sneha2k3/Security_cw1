@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DigiBank - Revolutionary Banking Experience</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css"  rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"  rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #4A90E2;
+            --light-blue: #E3F2FD;
+            --medium-blue: #90CAF9;
+            --soft-blue: #BBDEFB;
+            --powder-blue: #E1F5FE;
+            --sky-blue: #87CEEB;
+            --ice-blue: #F0F8FF;
+            --primary-color: #4A90E2;
+            --secondary-color: #90CAF9;
+            --accent-color: #1976D2;
+            --success-color: #4CAF50;
+            --warning-color: #FF9800;
+            --danger-color: #F44336;
+            --text-color: #2C3E50;
+            --text-light: #607D8B;
+            --text-muted: #90A4AE;
+            --body-bg: #F8FBFF;
+            --light-bg: #FAFCFF;
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --glass-bg: rgba(255, 255, 255, 0.9);
+            --card-shadow: 0 4px 12px rgba(74, 144, 226, 0.1);
+            --card-shadow-hover: 0 8px 24px rgba(74, 144, 226, 0.15);
+            --soft-shadow: 0 2px 8px rgba(74, 144, 226, 0.08);
+            --transition-speed: 0.2s;
+            --transition-smooth: 0.25s ease-out;
+            --border-radius: 12px;
+            --border-radius-lg: 16px;
+            --border-radius-sm: 8px;
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--body-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 25% 25%, rgba(74, 144, 226, 0.03) 0%, transparent 50%),
+                radial-gradient(circle at 75% 75%, rgba(144, 202, 249, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: -1;
+        }
+        .navbar {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            box-shadow: var(--card-shadow);
+            transition: all var(--transition-speed);
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(74, 144, 226, 0.1);
+        }
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem;
+            color: var(--primary-color);
+        }
+        .nav-link {
+            font-weight: 500;
+            color: var(--text-color) !important;
+            margin: 0 0.5rem;
+            transition: all var(--transition-speed);
+        }
+        .nav-link:hover {
+            color: var(--primary-color) !important;
+            transform: translateY(-2px);
+        }
+        .btn-gradient {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 2rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-block;
+            transition: all var(--transition-speed);
+            box-shadow: 0 4px 12px rgba(74, 144, 226, 0.25);
+        }
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(74, 144, 226, 0.3);
+            color: white;
+        }
+        .btn-gradient-secondary {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--medium-blue) 100%);
+            box-shadow: 0 4px 12px rgba(144, 202, 249, 0.4);
+        }
+        .hero-section {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            background: linear-gradient(135deg, var(--light-bg) 0%, var(--powder-blue) 100%);
+            padding-top: 80px;
+        }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            line-height: 1.2;
+        }
+        .hero-subtitle {
+            font-size: 1.4rem;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        .hero-mockup {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border-radius: var(--border-radius-lg);
+            padding: 3rem;
+            color: white;
+            box-shadow: var(--card-shadow-hover);
+            transition: transform var(--transition-speed);
+        }
+        .hero-mockup:hover {
+            transform: translateY(-5px);
+        }
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+        }
+        .stat-item {
+            text-align: center;
+            margin-bottom: 2rem;
+            transition: transform var(--transition-speed);
+        }
+        .stat-item:hover {
+            transform: translateY(-5px);
+        }
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+            color: white;
+        }
+        .stat-label {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        .features-section {
+            padding: 100px 0;
+            background: var(--card-bg);
+        }
+        .section-title {
+            font-size: 3rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 4rem;
+        }
+        .feature-card {
+            background: var(--glass-bg);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--card-shadow);
+            transition: all var(--transition-speed);
+            border: 1px solid rgba(74, 144, 226, 0.1);
+            height: 100%;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--card-shadow-hover);
+        }
+        .feature-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+            margin-bottom: 1.5rem;
+            transition: transform var(--transition-speed);
+        }
+        .feature-card:hover .feature-icon {
+            transform: scale(1.05);
+        }
+        .feature-icon.icon-1 {
+             background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+         }
+        .feature-icon.icon-2 {
+             background: linear-gradient(135deg, var(--secondary-color) 0%, var(--medium-blue) 100%);
+         }
+        .feature-icon.icon-3 {
+             background: linear-gradient(135deg, var(--sky-blue) 0%, var(--primary-color) 100%);
+         }
+        .testimonials-section {
+            padding: 100px 0;
+            background: var(--light-bg);
+        }
+        .testimonial-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 2.5rem;
+            margin: 1rem 0;
+            box-shadow: var(--card-shadow);
+            text-align: center;
+            transition: all var(--transition-speed);
+            border: 1px solid rgba(74, 144, 226, 0.1);
+        }
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-shadow-hover);
+        }
+        .testimonial-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+            font-weight: 600;
+        }
+        .testimonial-text {
+            font-style: italic;
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        .testimonial-author {
+            font-weight: 600;
+            color: var(--text-color);
+        }
+        .testimonial-role {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+        .contact-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+        }
+        .contact-form {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius);
+            padding: 3rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: var(--border-radius-sm);
+            padding: 1rem;
+            color: white;
+            font-size: 1rem;
+            transition: all var(--transition-speed);
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+            box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+            color: white;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        .form-label {
+            color: white;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        .btn-contact {
+            background: white;
+            color: var(--text-color);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            transition: all var(--transition-speed);
+            box-shadow: var(--soft-shadow);
+        }
+        .btn-contact:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--card-shadow);
+            color: var(--text-color);
+        }
+        .footer {
+            background: linear-gradient(135deg, var(--text-color) 0%, #34495e 100%);
+            color: white;
+            padding: 60px 0 30px;
+        }
+        .footer-content {
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding-bottom: 2rem;
+            margin-bottom: 2rem;
+        }
+        .footer-section h5 {
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: white;
+        }
+        .footer-link {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all var(--transition-speed);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        .footer-link:hover {
+            color: var(--secondary-color);
+            transform: translateX(5px);
+        }
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border-radius: 50%;
+            margin-right: 1rem;
+            transition: all var(--transition-speed);
+            text-decoration: none;
+        }
+        .social-links a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+            color: white;
+        }
+        #welcome-message {
+            background: rgba(74, 144, 226, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: var(--border-radius-sm);
+            padding: 1rem;
+            margin-top: 1rem;
+            border: 1px solid rgba(74, 144, 226, 0.2);
+        }
+        #contact-response {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--border-radius-sm);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            .hero-buttons {
+                justify-content: center;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .feature-card {
+                margin-bottom: 2rem;
+                padding: 2rem;
+            }
+            .hero-mockup {
+                padding: 2rem;
+            }
+        }
+        .navbar-toggler {
+            border: none;
+            padding: 0.25rem 0.5rem;
+        }
+        .navbar-toggler:focus {
+            box-shadow: none;
+        }
+        .navbar-toggler-icon {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%2874, 144, 226, 1%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#">
+                <i class="fas fa-university me-2"></i>DigiBank
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav mx-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#home">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#features">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#testimonials">Testimonials</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">Contact</a>
+                    </li>
+                </ul>
+                <div class="d-flex gap-2">
+                    <a href="login.php" class="btn-gradient">Login</a>
+                    <a href="register.php" class="btn-gradient btn-gradient-secondary">Register</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <section id="home" class="hero-section">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <div class="hero-content">
+                        <h1 class="hero-title">Banking Reimagined for the Digital Age</h1>
+                        <p class="hero-subtitle">Experience seamless, secure, and intelligent banking solutions that adapt to your lifestyle. Join thousands of satisfied customers in the future of finance.</p>
+                        <div class="hero-buttons">
+                            <a href="register.php" class="btn-gradient">Get Started Free</a>
+                            <a href="login.php" class="btn-gradient btn-gradient-secondary">Sign In</a>
+                        </div>
+                        <div id="welcome-message"></div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="hero-image text-center">
+                        <div class="hero-mockup">
+                            <i class="fas fa-mobile-alt" style="font-size: 5rem; margin-bottom: 1rem;"></i>
+                            <h3>Mobile First Banking</h3>
+                            <p>Access your finances anywhere, anytime with our award-winning mobile experience.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="stats-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">500K+</span>
+                        <span class="stat-label">Happy Customers</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">$2.5B+</span>
+                        <span class="stat-label">Transactions Processed</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">99.9%</span>
+                        <span class="stat-label">Uptime Guarantee</span>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-item">
+                        <span class="stat-number">24/7</span>
+                        <span class="stat-label">Customer Support</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">Revolutionary Features</h2>
+                    <p class="section-subtitle">Discover what makes DigiBank the preferred choice for modern banking</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-1">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h4>Military-Grade Security</h4>
+                        <p>Your data is protected with bank-level encryption, biometric authentication, and real-time fraud monitoring. Sleep peacefully knowing your finances are secure.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-2">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h4>Lightning-Fast Transfers</h4>
+                        <p>Send money instantly to anyone, anywhere in the world. Our advanced infrastructure ensures your transactions are completed in seconds, not hours.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-3">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h4>AI-Powered Insights</h4>
+                        <p>Get personalized financial advice, spending insights, and investment recommendations powered by cutting-edge artificial intelligence technology.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-1">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h4>Global Accessibility</h4>
+                        <p>Access your account from anywhere in the world with our multi-platform support. Web, mobile, tablet - we've got you covered on every device.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-2">
+                            <i class="fas fa-chart-pie"></i>
+                        </div>
+                        <h4>Smart Budgeting</h4>
+                        <p>Take control of your finances with intelligent budgeting tools, spending categories, and automatic savings features that adapt to your lifestyle.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="feature-card">
+                        <div class="feature-icon icon-3">
+                            <i class="fas fa-headset"></i>
+                        </div>
+                        <h4>Premium Support</h4>
+                        <p>Get help when you need it with our 24/7 customer support team. Live chat, phone support, and dedicated account managers for premium customers.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="testimonials" class="testimonials-section">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="section-title">What Our Customers Say</h2>
+                    <p class="section-subtitle">Don't just take our word for it - hear from our satisfied customers</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">S</div>
+                        <p class="testimonial-text">"DigiBank transformed how I manage my finances. The AI insights helped me save $5,000 in just six months. It's like having a personal financial advisor in my pocket!"</p>
+                        <div class="testimonial-author">Sarah Johnson</div>
+                        <div class="testimonial-role">Marketing Director</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">M</div>
+                        <p class="testimonial-text">"As a small business owner, I needed banking that could keep up with my pace. DigiBank's instant transfers and business insights have been game-changers for my company's cash flow."</p>
+                        <div class="testimonial-author">Michael Chen</div>
+                        <div class="testimonial-role">Business Owner</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">E</div>
+                        <p class="testimonial-text">"The security features give me complete peace of mind. After experiencing fraud with my previous bank, DigiBank's proactive monitoring and instant alerts make me feel truly protected."</p>
+                        <div class="testimonial-author">Emily Rodriguez</div>
+                        <div class="testimonial-role">Software Engineer</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">D</div>
+                        <p class="testimonial-text">"I travel constantly for work, and DigiBank's global accessibility has been incredible. No more worrying about foreign transaction fees or accessing my money abroad."</p>
+                        <div class="testimonial-author">David Kim</div>
+                        <div class="testimonial-role">Consultant</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">L</div>
+                        <p class="testimonial-text">"The customer support is phenomenal. I had an issue at midnight, and their live chat resolved it within minutes. That's the kind of service that builds loyalty."</p>
+                        <div class="testimonial-author">Lisa Thompson</div>
+                        <div class="testimonial-role">Freelance Designer</div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="testimonial-card">
+                        <div class="testimonial-avatar">R</div>
+                        <p class="testimonial-text">"Switching to DigiBank was the best financial decision I've made. The budgeting tools helped me finally get control of my spending and start building real wealth."</p>
+                        <div class="testimonial-author">Robert Garcia</div>
+                        <div class="testimonial-role">Teacher</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2 class="section-title text-white text-center">Get In Touch</h2>
+                    <p class="section-subtitle text-white text-center opacity-75">Have questions? We'd love to hear from you. Send us a message and we'll respond as soon as possible.</p>
+                    <div class="contact-form">
+                        <form id="contactForm">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="contactName" class="form-label">Full Name</label>
+                                        <input type="text" class="form-control" id="contactName" placeholder="Enter your full name" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="contactEmail" class="form-label">Email address</label>
+                                        <input type="email" class="form-control" id="contactEmail" placeholder="name@example.com" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactSubject" class="form-label">Subject</label>
+                                <input type="text" class="form-control" id="contactSubject" placeholder="Briefly describe your inquiry" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="contactMessage" class="form-label">Message</label>
+                                <textarea class="form-control" id="contactMessage" rows="5" placeholder="Your detailed message..." required></textarea>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-contact">
+                                    Send Message <span id="loadingSpinner" class="loading ms-2 d-none"></span>
+                                </button>
+                            </div>
+                            <div id="contact-response" class="d-none text-center"></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="container">
+            <div class="row footer-content">
+                <div class="col-md-4 mb-4">
+                    <div class="footer-section">
+                        <h5 class="navbar-brand">
+                            <i class="fas fa-university me-2"></i>DigiBank
+                        </h5>
+                        <p class="text-white-75">Your trusted partner for modern and secure banking solutions. Experience the future of finance today.</p>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <div class="footer-section">
+                        <h5>Company</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">About Us</a></li>
+                            <li><a href="#" class="footer-link">Careers</a></li>
+                            <li><a href="#" class="footer-link">Press</a></li>
+                            <li><a href="#" class="footer-link">Partnerships</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <div class="footer-section">
+                        <h5>Products</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Personal Banking</a></li>
+                            <li><a href="#" class="footer-link">Business Banking</a></li>
+                            <li><a href="#" class="footer-link">Loans</a></li>
+                            <li><a href="#" class="footer-link">Investments</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <div class="footer-section">
+                        <h5>Support</h5>
+                        <ul class="list-unstyled">
+                            <li><a href="#" class="footer-link">Help Center</a></li>
+                            <li><a href="#" class="footer-link">FAQs</a></li>
+                            <li><a href="#" class="footer-link">Security</a></li>
+                            <li><a href="#" class="footer-link">Privacy Policy</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-md-2 col-6 mb-4">
+                    <div class="footer-section">
+                        <h5>Connect</h5>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <p class="mb-0 text-white-75">&copy; 2025 DigiBank. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/js/bootstrap.bundle.min.js"></script> 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const initializeApp = () => {
+                const config = {
+                    debug: false,
+                    analytics: true,
+                    performance: {
+                        monitoring: true,
+                        threshold: 1000
+                    },
+                    security: {
+                        enabled: false // Disabled intentionally for CTF
+                    }
+                };
+                const utils = {
+                    debounce: (func, wait) => {
+                        let timeout;
+                        return function executedFunction(...args) {
+                            const later = () => {
+                                clearTimeout(timeout);
+                                func(...args);
+                            };
+                            clearTimeout(timeout);
+                            timeout = setTimeout(later, wait);
+                        };
+                    },
+                    throttle: (func, limit) => {
+                        let inThrottle;
+                        return function(...args) {
+                            if (!inThrottle) {
+                                func.apply(this, args);
+                                inThrottle = true;
+                                setTimeout(() => inThrottle = false, limit);
+                            }
+                        };
+                    }
+                };
+                const eventHandlers = {
+                    handleScroll: utils.throttle(() => {
+                        const scrollPosition = window.scrollY;
+                        const navbar = document.querySelector('.navbar');
+                        if (scrollPosition > 100) {
+                            navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                        } else {
+                            navbar.style.background = 'rgba(255, 255, 255, 0.8)';
+                        }
+                    }, 100),
+                    handleResize: utils.debounce(() => {
+                        const width = window.innerWidth;
+                        if (width < 768) {
+                            document.body.classList.add('mobile-view');
+                        } else {
+                            document.body.classList.remove('mobile-view');
+                        }
+                    }, 250)
+                };
+                window.addEventListener('scroll', eventHandlers.handleScroll);
+                window.addEventListener('resize', eventHandlers.handleResize);
+                const analytics = {
+                    track: (event, data) => {
+                        if (config.analytics) {
+                            console.log(`[Analytics] ${event}`, data);
+                        }
+                    },
+                    pageView: () => {
+                        analytics.track('page_view', {
+                            path: window.location.pathname,
+                            timestamp: new Date().toISOString()
+                        });
+                    }
+                };
+                analytics.pageView();
+                const performance = {
+                    measure: (name) => {
+                        if (config.performance.monitoring) {
+                            const start = performance.now();
+                            return {
+                                end: () => {
+                                    const duration = performance.now() - start;
+                                    if (duration > config.performance.threshold) {
+                                        console.warn(`[Performance] ${name} took ${duration}ms`);
+                                    }
+                                }
+                            };
+                        }
+                        return { end: () => {} };
+                    }
+                };
+                const urlParams = new URLSearchParams(window.location.search);
+                const name = urlParams.get('name');
+                if (name) {
+                    const welcomeMessageDiv = document.getElementById('welcome-message');
+                    welcomeMessageDiv.innerHTML = `Welcome, ${name}! We're glad to see you.`; // ❌ Vulnerable: innerHTML + unescaped input
+                    welcomeMessageDiv.classList.remove('d-none');
+                }
+                const contactForm = document.getElementById('contactForm');
+                const contactNameInput = document.getElementById('contactName');
+                const contactEmailInput = document.getElementById('contactEmail');
+                const contactSubjectInput = document.getElementById('contactSubject');
+                const contactMessageInput = document.getElementById('contactMessage');
+                const loadingSpinner = document.getElementById('loadingSpinner');
+                const contactResponseDiv = document.getElementById('contact-response');
+                contactForm.addEventListener('submit', function(event) {
+                    event.preventDefault();
+                    loadingSpinner.classList.remove('d-none');
+                    contactResponseDiv.classList.add('d-none');
+                    const formData = {
+                        name: contactNameInput.value,
+                        email: contactEmailInput.value,
+                        subject: contactSubjectInput.value,
+                        message: contactMessageInput.value
+                    };
+                    setTimeout(() => {
+                        loadingSpinner.classList.add('d-none');
+                        const success = Math.random() > 0.3;
+                        if (success) {
+                            contactResponseDiv.innerHTML = `<i class="fas fa-check-circle text-success me-2"></i> Thank you, ${formData.name}! Your message has been sent successfully. We'll get back to you shortly.`;
+                            contactResponseDiv.classList.remove('d-none');
+                            contactResponseDiv.classList.add('alert-success');
+                            contactResponseDiv.classList.remove('alert-danger');
+                            contactForm.reset();
+                            localStorage.setItem('userName', formData.name);
+                            const welcomeMessageDiv = document.getElementById('welcome-message');
+                            welcomeMessageDiv.textContent = `Welcome back, ${formData.name}! We're glad to see you.`;
+                            welcomeMessageDiv.classList.remove('d-none');
+                        } else {
+                            contactResponseDiv.innerHTML = `<i class="fas fa-exclamation-triangle text-danger me-2"></i> Oops! Something went wrong. Please try again later.`;
+                            contactResponseDiv.classList.remove('d-none');
+                            contactResponseDiv.classList.add('alert-danger');
+                            contactResponseDiv.classList.remove('alert-success');
+                        }
+                    }, 2000);
+                });
+            };
+            const app = initializeApp();
+            document.querySelectorAll('a.nav-link[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    const navbarCollapse = document.getElementById('navbarNav');
+                    if (navbarCollapse.classList.contains('show')) {
+                        new bootstrap.Collapse(navbarCollapse, { toggle: false }).hide();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

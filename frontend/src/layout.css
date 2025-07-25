@@ -1,0 +1,138 @@
+.main{
+    padding: 20px;
+}
+.sidebar{
+    background-color: rgb(79, 151, 247) !important;
+    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    margin-right: 20px;
+    height: 20vh;
+    padding: 10px;
+    width: 100%;
+    margin-bottom: 20px;
+    overflow-x: scroll !important;
+}
+.sidebar-header {
+    padding: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.logo{
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+.role-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: inline-block;
+    margin-bottom: 10px;
+}
+.content{
+    width: 100%;
+    height: 100%;
+}
+.header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: white !important;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    height: 10vh;
+    width: 100%;
+}
+.clinic-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #005555;
+}
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+.notification-badge {
+    cursor: pointer;
+}
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: all 0.3s;
+}
+.user-info:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+.user-avatar {
+    background-color: #005555;
+}
+.user-name {
+    font-weight: 500;
+}
+.header-action-icon{
+    font-size: 30px;
+    color: black;
+    cursor: pointer;
+}
+.body{
+    padding: 20px;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    background-color: white !important;
+    border-radius: 5px;
+    box-shadow: 0 0 2px gray;
+    width: 100%;
+}
+.menu{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px ;
+}
+.menu-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-left: 4px solid transparent;
+}
+.menu-item:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: white;
+}
+.active-menu-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: white;
+    color: white;
+    border-color: rgb(29, 85, 237);
+    padding: 5px;
+    border-radius: 5px;
+}
+.menu-item a{
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+.menu-item i{
+    font-size: 1.2rem;
+    margin-right: 10px;
+    color: rgba(255, 255, 255, 0.906);
+    text-decoration: none;
+}
+.menu-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 10px 0;
+}
+.logout-item {
+    color: #ff6b6b;
+}

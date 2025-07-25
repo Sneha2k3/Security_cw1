@@ -1,0 +1,73 @@
+.doctor-form-card {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 8px;
+  margin: 20px 0;
+  background-color: #fff;
+}
+
+.doctor-form {
+  padding: 10px;
+}
+
+.section-title {
+  color: #1890ff;
+  margin-bottom: 0 !important;
+}
+
+.section-icon {
+  margin-right: 10px;
+}
+
+.mt-4 {
+  margin-top: 24px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 32px;
+}
+
+.submit-button {
+  min-width: 120px;
+  height: 42px;
+  background: linear-gradient(90deg, #1890ff 0%, #0050b3 100%);
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.045);
+  transition: all 0.3s;
+}
+
+.submit-button:hover {
+  background: linear-gradient(90deg, #40a9ff 0%, #096dd9 100%);
+  transform: translateY(-1px);
+}
+
+.full-width {
+  width: 100%;
+}
+
+.ant-input-affix-wrapper {
+  border-radius: 4px;
+  padding: 8px 11px;
+}
+
+.ant-form-item-label > label {
+  font-weight: 500;
+  color: #4a4a4a;
+}
+
+.ant-divider {
+  margin: 16px 0 24px;
+}
+
+@media (max-width: 576px) {
+  .doctor-form-card {
+    margin: 10px 0;
+  }
+  
+  .form-actions {
+    justify-content: center;
+  }
+}
