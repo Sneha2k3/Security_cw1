@@ -16,20 +16,7 @@ const QRCode = require("qrcode");
 router.post("/register", async (req, res) => {
     try {
         const userExists = await User.findOne({ email: req.body.email });
-        if (userExists) {
-            return res.status(200).send({ message: "User already exists", success: false });
-        }
-        const password = req.body.password;
-        const salt = await bcrypt.genSalt(10);
-        const hashedPassword = await bcrypt.hash(password, salt);
-        req.body.password = hashedPassword;
-        const mfaSecret = speakeasy.generateSecret({
-            name: `HealthBag:${req.body.email}`
-        });
-        req.body = {
-            ...req.body,
-            mfaSecret: mfaSecret.base32
-        }
+
 
         const qrCodeUrl = await QRCode.toDataURL(mfaSecret.otpauth_url);
 
@@ -80,10 +67,10 @@ router.post("/verify-mfa", async (req, res) => {
     if (!email || !mfaCode) {
         return res.status(400).json({ error: 'Email and MFA code are required' });
     }
-    const user = await User.findOne({email});
+    const user = await User.findOne({ email });
 
-    if(!user){
-        return res.status(404).json({error : "User with given email not found"});
+    if (!user) {
+        return res.status(404).json({ error: "User with given email not found" });
     }
     if (!mfaCode) {
         return res.status(401).json({ error: 'MFA code required' });
@@ -93,7 +80,7 @@ router.post("/verify-mfa", async (req, res) => {
         secret: user.mfaSecret,
         encoding: 'base32',
         token: mfaCode,
-        window: 1 
+        window: 1
     });
 
     if (!isMfaValid) {
@@ -107,34 +94,34 @@ router.post("/verify-mfa", async (req, res) => {
         success: true,
         token,
         data: {
-            name : user.name,
+            name: user.name,
             email: user.email,
             isDoctor: user.isDoctor,
             isAdmin: user.isAdmin,
             mfaEnabled: user.mfaEnabled,
         }
-    }); 
+    });
 })
 
 router.post('/mfa/enable', async (req, res) => {
     try {
-      const { email, enable } = req.body;
-      const user = await User.findOne({ email });
-      
-      if (!user) {
-        return res.status(404).json({ error: 'User not found' });
-      }
-      
-      user.mfaEnabled = enable;
-      await user.save();
-      
-      res.json({ 
-        message: `MFA ${enable ? 'enabled' : 'disabled'}`,
-        enabled: user.mfaEnabled,
-        success: true,
-     });
+        const { email, enable } = req.body;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json({ error: 'User not found' });
+        }
+
+        user.mfaEnabled = enable;
+        await user.save();
+
+        res.json({
+            message: `MFA ${enable ? 'enabled' : 'disabled'}`,
+            enabled: user.mfaEnabled,
+            success: true,
+        });
     } catch (error) {
-      res.status(500).json({ error: 'MFA update failed' });
+        res.status(500).json({ error: 'MFA update failed' });
     }
 });
 
@@ -171,10 +158,10 @@ router.post("/login", loginLimiter, checkLockout, async (req, res) => {
         if (user.mfaEnabled) {
             return res.status(200).json({
                 mfaRequired: true,
-                email : user.email,
+                email: user.email,
                 success: true,
             })
-            
+
         }
 
         user.failedLoginAttempts = 0;
