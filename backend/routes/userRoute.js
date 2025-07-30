@@ -16,7 +16,20 @@ const QRCode = require("qrcode");
 router.post("/register", async (req, res) => {
     try {
         const userExists = await User.findOne({ email: req.body.email });
-
+        if (userExists) {
+            return res.status(200).send({ message: "User already exists", success: false });
+        }
+        const password = req.body.password;
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+        req.body.password = hashedPassword;
+        const mfaSecret = speakeasy.generateSecret({
+            name: `HealthBag:${req.body.email}`
+        });
+        req.body = {
+            ...req.body,
+            mfaSecret: mfaSecret.base32
+        }
 
         const qrCodeUrl = await QRCode.toDataURL(mfaSecret.otpauth_url);
 
