@@ -5,51 +5,39 @@ const authMiddleware = require("../middlewares/authMiddleware");
 const Appointment = require('../models/appointmentModel');
 const User = require('../models/userModel');
 
-router.get("/get-doctor-info-by-user-id/:userId", authMiddleware, async(req, res) => {
+router.get("/get-doctor-info-by-user-id/:userId", authMiddleware, async (req, res) => {
 
-    try{
+    try {
         console.log(req.params.userId);
-        const doctor = await Doctor.findOne({userId: req.params.userId});
+        const doctor = await Doctor.findOne({ userId: req.params.userId });
         console.log(doctor);
         res.status(200).send({
             success: true,
             message: "Doctor info fetched successfully",
             data: doctor,
         })
-        
-    }catch (error){
+
+    } catch (error) {
         res
-        .status(500)
-        .send({message: "Error getting doctor info", success: false, error});
+            .status(500)
+            .send({ message: "Error getting doctor info", success: false, error });
     }
 });
 
-router.get("/get-doctor-info-by-id/:doctorId", authMiddleware, async(req, res) => {
-    try{
-        console.log(req.params.doctorId);
-        const doctor = await Doctor.findOne({_id: req.params.doctorId});
-
-        console.log(doctor.firstName);
-        console.log(doctor.lastName);
-
-        res.status(200).send({
-            success: true,
-            message: "Doctor info fetched successfully",
-            data: doctor,
-        })
+router.get
         
-    }catch (error){
-        
-        res
+    }catch (error) {
+
+    res
         .status(500)
-        .send({message: "Error getting doctor info", success: false, error});
-    }
+        .send({ message: "Error getting doctor info", success: false, error });
+}
 });
 
-router.post("/get-doctor-info-by-id/", authMiddleware, async(req, res) => {
-    try{
+router.post("/get-doctor-info-by-id/", authMiddleware, async (req, res) => {
+    try {
         console.log(req.body.doctorId);
-        const doctor = await Doctor.findOne({_id: req.body.doctorId});
+        const doctor = await Doctor.findOne({ _id: req.body.doctorId });
 
         console.log(doctor.firstName);
         console.log(doctor.lastName);
@@ -59,19 +47,19 @@ router.post("/get-doctor-info-by-id/", authMiddleware, async(req, res) => {
             message: "Doctor info fetched successfully",
             data: doctor,
         })
-        
-    }catch (error){
-        
+
+    } catch (error) {
+
         res
-        .status(500)
-        .send({message: "Error getting doctor info", success: false, error});
+            .status(500)
+            .send({ message: "Error getting doctor info", success: false, error });
     }
 });
 
-router.post('/update-doctor-profile', authMiddleware, async(req, res) => {
+router.post('/update-doctor-profile', authMiddleware, async (req, res) => {
 
-    try{
-        const doctor = await Doctor.findOneAndUpdate({userId: req.body.userId}, req.body);
+    try {
+        const doctor = await Doctor.findOneAndUpdate({ userId: req.body.userId }, req.body);
 
         console.log(doctor);
 
@@ -80,24 +68,24 @@ router.post('/update-doctor-profile', authMiddleware, async(req, res) => {
             message: "Doctor profile updated successfully",
             data: doctor,
         })
-    }catch (error){
+    } catch (error) {
         return res
-        .status(500)
-        .send({message: "Error getting doctor info", sucess: false, error});
+            .status(500)
+            .send({ message: "Error getting doctor info", sucess: false, error });
     }
 });
 
-router.get("/get-appointments-by-doctor-id", authMiddleware, async(req, res) => {
-    try{
-        const doctor = await Doctor.findOne({userId: req.body.userId});
+router.get("/get-appointments-by-doctor-id", authMiddleware, async (req, res) => {
+    try {
+        const doctor = await Doctor.findOne({ userId: req.body.userId });
         console.log(doctor);
-        const appointments = await Appointment.find({doctorId: doctor._id});
+        const appointments = await Appointment.find({ doctorId: doctor._id });
         res.status(200).send({
             message: "Appointments fetched successfully",
             success: true,
             data: appointments,
         });
-    }catch(error){
+    } catch (error) {
         console.log(error);
         res.status(500).send({
             message: "Error getting appointments",
@@ -107,14 +95,14 @@ router.get("/get-appointments-by-doctor-id", authMiddleware, async(req, res) => 
     }
 });
 
-router.post("/change-appointment-status", authMiddleware, async(req, res) => {
-    try{
-        const {appointmentId, status} = req.body;
+router.post("/change-appointment-status", authMiddleware, async (req, res) => {
+    try {
+        const { appointmentId, status } = req.body;
         const appointment = await Appointment.findByIdAndUpdate(appointmentId, {
             status,
         });
 
-        const user = await User.findOne({_id: appointment.userId});
+        const user = await User.findOne({ _id: appointment.userId });
 
         console.log(user);
 
@@ -133,7 +121,7 @@ router.post("/change-appointment-status", authMiddleware, async(req, res) => {
             success: true,
             data: appointment,
         });
-    }catch(error){
+    } catch (error) {
         console.log(error);
         res.status(500).send({
             message: "Error changing appointment status",
