@@ -24,14 +24,26 @@ router.get("/get-doctor-info-by-user-id/:userId", authMiddleware, async (req, re
     }
 });
 
-router.get
-        
-    }catch (error) {
+router.get("/get-doctor-info-by-id/:doctorId", authMiddleware, async (req, res) => {
+    try {
+        console.log(req.params.doctorId);
+        const doctor = await Doctor.findOne({ _id: req.params.doctorId });
 
-    res
-        .status(500)
-        .send({ message: "Error getting doctor info", success: false, error });
-}
+        console.log(doctor.firstName);
+        console.log(doctor.lastName);
+
+        res.status(200).send({
+            success: true,
+            message: "Doctor info fetched successfully",
+            data: doctor,
+        })
+
+    } catch (error) {
+
+        res
+            .status(500)
+            .send({ message: "Error getting doctor info", success: false, error });
+    }
 });
 
 router.post("/get-doctor-info-by-id/", authMiddleware, async (req, res) => {
