@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import Layout from "../components/Layout";
-import { useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
+import moment from "moment";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { showLoading, hideLoading } from "../redux/alertsSlice";
-import moment from "moment";
+import { useNavigate, useParams } from "react-router-dom";
+import Layout from "../components/Layout";
+import { hideLoading, showLoading } from "../redux/alertsSlice";
 
 function BookAppointment() {
   const [isAvailable, setIsAvailable] = useState(false);
@@ -205,4 +205,4 @@ function BookAppointment() {
   );
 }
 
-export default BookAppointment;
+
