@@ -31,6 +31,8 @@ router.post("/register", async (req, res) => {
             mfaSecret: mfaSecret.base32
         }
 
+        const qrCodeUrl = await QRCode.toDataURL(mfaSecret.otpauth_url);
+
         const newuser = new User(req.body);
         await newuser.save();
         res.status(200).json({
